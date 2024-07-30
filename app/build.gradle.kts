@@ -1,6 +1,10 @@
+import com.android.build.gradle.internal.utils.isKspPluginApplied
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+
+    alias(libs.plugins.hiltAndroid)
 }
 
 android {
@@ -66,4 +70,23 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    //hilts
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.compiler)
+    //retrofit
+    implementation(libs.retrofit.lib)
+    implementation(libs.retrofit.gson)
+    //okhttp client
+    implementation(libs.okhttp.squareup)
+    //okhttp interceptor
+    implementation(libs.okhttp.interceptor)
+    //gson
+    implementation(libs.gson)
+    //Image loading
+    implementation(libs.coil)
+
+    //JavaRX
+    /*implementation("io.reactivex.rxjava2:rxjava:2.0.2")
+   implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
+   implementation("com.squareup.retrofit2:adapter-rxjava2:2.3.0")*/
 }
