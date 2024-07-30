@@ -14,6 +14,9 @@ retrofitVersion = "2.9.0"
 okhttpVersion = "4.12.0"
 gsonVersion = "2.10.1"
 coilVersion = "2.5.0"
+navigationVersion = "2.5.0"
+navigationRuntimeKtx = "2.7.7"
+org-jetbrains-kotlin-android = "1.8.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,9 +41,12 @@ okhttp-squareup = {group = "com.squareup.okhttp3", name = "okhttp", version.ref 
 okhttp-interceptor = {group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpVersion"}
 gson = {group = "com.google.code.gson", name = "gson", version.ref = "gsonVersion"}
 coil = {group = "io.coil-kt", name = "coil", version.ref = "coilVersion"}
+androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
 
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 hiltAndroid = { id = "com.google.dagger.hilt.android", version.ref ="hiltVersion" }
+navigation = { id = "androidx.navigation.safeargs", version.ref ="navigationVersion" }
+org-jetbrains-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "org-jetbrains-kotlin-android" }
