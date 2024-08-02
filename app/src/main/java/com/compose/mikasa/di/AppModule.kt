@@ -49,7 +49,9 @@ object AppModule {
             val okHttpClientBuilder = OkHttpClient.Builder()
             okHttpClientBuilder.addInterceptor(
                 HttpLoggingInterceptor().setLevel(
-                    HttpLoggingInterceptor.Level.BODY))
+                    HttpLoggingInterceptor.Level.BODY
+                )
+            )
             return okHttpClientBuilder.build()
         }
 
@@ -66,13 +68,13 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideApiHelper(apiServices: ApiServices) : ApiHelper {
+    fun provideApiHelper(apiServices: ApiServices): ApiHelper {
         return ApiHelperImpl(apiServices)
     }
 
     @Provides
     @Singleton
-    fun provideMiKasaRepository(apiHelper: ApiHelper) : MiKasaRepository {
+    fun provideMiKasaRepository(apiHelper: ApiHelper): MiKasaRepository {
         return MiKasaRepository(apiHelper)
 
     }

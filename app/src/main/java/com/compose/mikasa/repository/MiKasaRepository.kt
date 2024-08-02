@@ -28,9 +28,9 @@ class MiKasaRepository @Inject constructor(
             }else {
                 emit(ResourceState.Error("Something went wrong"))
             })!!
-        }.catch { e ->
+        }/*.catch { e ->
             emit(ResourceState.Error(e?.localizedMessage ?: "Something went wrong"))
-        }
+        }*/
     }
 
 }
