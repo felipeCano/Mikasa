@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.hiltAndroid)
     alias(libs.plugins.navigation)
     alias(libs.plugins.org.jetbrains.kotlin.kapt)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -74,6 +75,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     //hilts
     implementation(libs.hilt.android)
+    implementation(libs.hilt.navigationCompose)
     kapt(libs.hilt.compiler)
     //retrofit
     implementation(libs.retrofit.lib)
@@ -86,6 +88,9 @@ dependencies {
     implementation(libs.gson)
     //Image loading
     implementation(libs.coil)
+    //Coroutines
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
 
     //JavaRX
     /*implementation("io.reactivex.rxjava2:rxjava:2.0.2")
