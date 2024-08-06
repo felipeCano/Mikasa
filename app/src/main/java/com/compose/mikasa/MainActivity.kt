@@ -10,6 +10,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.compose.mikasa.navigation.AppNavigationGraph
 import com.compose.mikasa.ui.theme.MikasaTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +20,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        installSplashScreen()
         setContent {
             MikasaTheme {
                 Surface(
@@ -27,7 +29,6 @@ class MainActivity : ComponentActivity() {
                         .background(
                             Color.White
                         )
-
                 ) {
                     MikasaEntryPoint()
                 }

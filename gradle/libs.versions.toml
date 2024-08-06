@@ -13,11 +13,12 @@ hiltNavigationVersion = "1.2.0"
 retrofitVersion = "2.9.0"
 okhttpVersion = "4.12.0"
 gsonVersion = "2.10.1"
-coilVersion = "2.5.0"
+coilVersion = "2.7.0"
 navigationVersion = "2.5.0"
 navigationRuntimeKtx = "2.7.7"
 org-jetbrains-kotlin-android = "1.8.0"
 coroutinesVersion = "1.7.3"
+splasScreenVersion = "1.0.0-alpha01"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -42,10 +43,11 @@ retrofit-gson = {group = "com.squareup.retrofit2", name = "converter-gson", vers
 okhttp-squareup = {group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttpVersion"}
 okhttp-interceptor = {group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpVersion"}
 gson = {group = "com.google.code.gson", name = "gson", version.ref = "gsonVersion"}
-coil = {group = "io.coil-kt", name = "coil", version.ref = "coilVersion"}
+coil = {group = "io.coil-kt", name = "coil-compose", version.ref = "coilVersion"}
 androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
 coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
 coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutinesVersion" }
+splash-screen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splasScreenVersion" }
 
 
 

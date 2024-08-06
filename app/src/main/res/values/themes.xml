@@ -2,4 +2,10 @@
 <resources>
 
     <style name="Theme.Mikasa" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_attack</item>
+        <item name="postSplashScreenTheme">@style/Theme.Mikasa</item>
+    </style>
 </resources>
