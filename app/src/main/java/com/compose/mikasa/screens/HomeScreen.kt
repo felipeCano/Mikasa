@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.compose.mikasa.components.EmptyStateComponent
 import com.compose.mikasa.components.Loader
 import com.compose.mikasa.components.MiKasaList
 import com.compose.mikasa.components.MiKasaRowComponent
@@ -53,6 +54,8 @@ fun HomeScreen(
                 Log.d("Success", "tengo info? ${characters.info.count} = ${characters.results}")
                 if (characters.results.isNotEmpty()) {
                     MiKasaRowComponent(page, characters.results.get(page))
+                }else{
+                   EmptyStateComponent()
                 }
             }
 

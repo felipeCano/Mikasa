@@ -1,8 +1,10 @@
 package com.compose.mikasa.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,7 +22,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -70,7 +74,8 @@ fun NormalTextComponent(textValue: String) {
         text = textValue,
         style = TextStyle(
             fontSize = 18.sp,
-            fontWeight = FontWeight.Normal
+            fontWeight = FontWeight.Normal,
+            fontFamily = FontFamily.Monospace
         )
     )
 }
@@ -80,7 +85,7 @@ fun HeadingTextComponent(textValue: String) {
     Text(
         modifier = Modifier
             //.fillMaxSize()
-            .wrapContentHeight()
+            //.wrapContentHeight()
             .padding(8.dp),
         text = textValue,
         style = TextStyle(
@@ -94,22 +99,78 @@ fun HeadingTextComponent(textValue: String) {
 fun MiKasaRowComponent(page: Int, character: Result) {
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            //.fillMaxSize()
             .padding(8.dp)
             .background(Color.White)
     ) {
         AsyncImage(
             modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
+                //.fillMaxWidth()
+                //.wrapContentHeight()
                 .height(240.dp),
             model = character.img,
             contentDescription = "",
             contentScale = ContentScale.Crop,
             error = painterResource(id = R.drawable.eren_image)
         )
-        NormalTextComponent(textValue = character.name ?: "NA")
+        HeadingTextComponent(textValue = "Name: ${character.name}")
+        Spacer(modifier = Modifier.height(5.dp))
+        character.alias!!.forEach { alias ->
+            NormalTextComponent(textValue = "Alias: $alias")
+        }
+        character.species!!.forEach { specie ->
+            NormalTextComponent(textValue = "Specie: $specie")
+        }
+        character.groups!!.forEach { groups ->
+            groups.sub_groups.forEach { subGroups ->
+                GroupComponent(groups.name, subGroups)
+            }
 
+        }
+
+        character.relatives!!.forEach { relative ->
+            relative.members.forEach { members ->
+                RelativeComponent(relative.family, members)
+            }
+
+        }
+
+
+    }
+}
+
+@Composable
+fun GroupComponent(name: String?, sub_groups: String?) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 5.dp, end = 5.dp)
+    ) {
+        name.also {
+            Text(text = "Relative: $it")
+        }
+        Spacer(modifier = Modifier.height(5.dp))
+        sub_groups.also {
+            Text(text = it!!)
+        }
+    }
+}
+
+@Composable
+fun RelativeComponent(name: String?, sub_groups: String?) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 5.dp, end = 5.dp)
+    ) {
+
+        name.also {
+            Text(text = "Relative: $it")
+        }
+        Spacer(modifier = Modifier.height(5.dp))
+        sub_groups.also {
+            Text(text = it!!)
+        }
     }
 }
 
@@ -134,4 +195,19 @@ fun MiKasaRowComponentPreview() {
         null
     )
     MiKasaRowComponent(0, character)
+}
+
+@Composable
+fun EmptyStateComponent() {
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Image(painter = painterResource(id = R.drawable.ic_android_black_24dp), contentDescription = stringResource(
+            R.string.no_data_available
+        )
+        )
+    }
 }
