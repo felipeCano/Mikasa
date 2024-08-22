@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -84,8 +83,6 @@ fun NormalTextComponent(textValue: String) {
 fun HeadingTextComponent(textValue: String) {
     Text(
         modifier = Modifier
-            //.fillMaxSize()
-            //.wrapContentHeight()
             .padding(8.dp),
         text = textValue,
         style = TextStyle(
@@ -99,14 +96,11 @@ fun HeadingTextComponent(textValue: String) {
 fun MiKasaRowComponent(page: Int, character: Result) {
     Column(
         modifier = Modifier
-            //.fillMaxSize()
             .padding(8.dp)
             .background(Color.White)
     ) {
         AsyncImage(
             modifier = Modifier
-                //.fillMaxWidth()
-                //.wrapContentHeight()
                 .height(240.dp),
             model = character.img,
             contentDescription = "",

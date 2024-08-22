@@ -20,7 +20,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.MyAppAndroidTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -93,4 +93,10 @@ dependencies {
     implementation(libs.coroutines.android)
     //SplashScreen
     implementation(libs.splash.screen)
+    //hiltsTest
+    implementation(libs.hilt.android.testing)
+    //corotinesTest
+    implementation(libs.kotlinx.coroutines.test)
+    //andriodxComposeMaterialForUnitTest
+    implementation(libs.io.mockk)
 }

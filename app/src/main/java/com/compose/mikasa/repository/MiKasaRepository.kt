@@ -2,19 +2,20 @@ package com.compose.mikasa.repository
 
 import android.util.Log
 import com.compose.mikasa.model.CharactersModel
+import com.compose.mikasa.utils.Constants.TEXT
 import com.compose.mikasa.utils.ResourceState
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
-import retrofit2.Response
 import javax.inject.Inject
 
 class MiKasaRepository @Inject constructor(
     private val apiHelper: ApiHelper
 ) {
-    /* suspend fun getCharactersTitans() : Response<CharactersModel> {
-         return apiHelper.getCharactersTitans()
-     }*/
+
+    fun testFunc(): String {
+        println(TEXT)
+        return "this is a test for el test"
+    }
 
     suspend fun getCharactersTitans(): Flow<ResourceState<CharactersModel>> {
         return flow {
@@ -25,12 +26,9 @@ class MiKasaRepository @Inject constructor(
                     Log.d("InsideRepository", "$it")
                     emit(ResourceState.Success(it))
                 }
-            }else {
+            } else {
                 emit(ResourceState.Error("Something went wrong"))
             })!!
-        }/*.catch { e ->
-            emit(ResourceState.Error(e?.localizedMessage ?: "Something went wrong"))
-        }*/
+        }
     }
-
 }
