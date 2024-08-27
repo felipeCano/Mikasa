@@ -94,9 +94,9 @@ dependencies {
     //SplashScreen
     implementation(libs.splash.screen)
     //hiltsTest
-    implementation(libs.hilt.android.testing)
+   // implementation(libs.hilt.android.testing)
     //corotinesTest
-    implementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.kotlinx.coroutines.test)
     //andriodxComposeMaterialForUnitTest
-    implementation(libs.io.mockk)
+    testImplementation(libs.io.mockk)
 }

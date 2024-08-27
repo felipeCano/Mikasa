@@ -2,29 +2,47 @@ package com.compose.mikasa.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Star
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -90,6 +108,109 @@ fun HeadingTextComponent(textValue: String) {
             fontWeight = FontWeight.Medium
         )
     )
+}
+
+@Composable
+fun CardLikeMovies(page: Int, character: Result) {
+    Card(
+        Modifier
+            .wrapContentSize()
+            .padding(10.dp)
+            .clickable {
+
+            },
+        elevation = CardDefaults.cardElevation(8.dp)
+    ) {
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) {
+            AsyncImage(
+                model = character.img,
+                contentDescription = "",
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(RoundedCornerShape(10.dp)),
+                contentScale = ContentScale.Crop,
+                error = painterResource(id = R.drawable.eren_image)
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .background(Color.LightGray.copy(.7f))
+                    .padding(6.dp)
+            ) {
+                Text(
+                    text = "Name: ${character.name}",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    color = Color.Black,
+                    maxLines = 1,
+                    style = TextStyle(
+                        shadow = Shadow(
+                            Color(0xFFFC6603),
+                            offset = Offset(1f, 1f),
+                            3f
+                        )
+                    )
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Row (Modifier.align(Alignment.End)){
+                Icon(imageVector = Icons.Rounded.Star, contentDescription = "")
+                    Text(
+                        text = "test",
+                        textAlign = TextAlign.Start,
+                        modifier = Modifier.fillMaxSize().padding(start = 8.dp),
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black,
+                        maxLines = 2
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun MyCard(page: Int, character: Result) {
+
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+
+        Card(
+            modifier = Modifier
+                .width(300.dp)
+                .height(300.dp),//.padding(15.dp,15.dp,15.dp,15.dp),
+            //,
+            // shape = CutCornerShape(20.dp)
+            elevation = CardDefaults.cardElevation(10.dp),
+            //border = BorderStroke(3.dp,Color.Gray)
+            colors = CardDefaults.cardColors(
+                containerColor = Color.White
+            )
+        ) {
+            Column(modifier = Modifier.fillMaxSize()) {
+                AsyncImage(
+                    modifier = Modifier
+                        .height(240.dp),
+                    model = character.img,
+                    contentDescription = "",
+                    contentScale = ContentScale.Crop,
+                    error = painterResource(id = R.drawable.eren_image)
+                )
+                Text(
+                    text = "Name: ${character.name}",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    modifier = Modifier.padding(10.dp)
+                )
+                //HeadingTextComponent(textValue = "Name: ${character.name}")
+
+            }
+
+        }
+    }
 }
 
 @Composable
@@ -193,15 +314,18 @@ fun MiKasaRowComponentPreview() {
 
 @Composable
 fun EmptyStateComponent() {
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp),
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Image(painter = painterResource(id = R.drawable.ic_android_black_24dp), contentDescription = stringResource(
-            R.string.no_data_available
-        )
+        Image(
+            painter = painterResource(id = R.drawable.ic_android_black_24dp),
+            contentDescription = stringResource(
+                R.string.no_data_available
+            )
         )
     }
 }
