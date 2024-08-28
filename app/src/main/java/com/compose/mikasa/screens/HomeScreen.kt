@@ -20,15 +20,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.motionEventSpy
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.compose.mikasa.components.CardLikeMovies
 import com.compose.mikasa.components.EmptyStateComponent
 import com.compose.mikasa.components.Loader
-import com.compose.mikasa.components.MiKasaRowComponent
-import com.compose.mikasa.components.MyCard
 import com.compose.mikasa.utils.ResourceState
 import com.compose.mikasa.utils.ResourceState.Loading
 import com.compose.mikasa.viewmodel.MiKasaViewModel
@@ -36,7 +33,7 @@ import com.compose.mikasa.viewmodel.MiKasaViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeScreen(
+fun HomeScreen(navController: NavController,
     miKasaViewModel: MiKasaViewModel = hiltViewModel()
 ) {
     val charactersResponse by miKasaViewModel.characters.collectAsState()
@@ -97,8 +94,8 @@ fun TopBar() {
     TopAppBar(title = { Text(text = "Attack of titans") })
 }
 
-@Preview
+/*@Preview
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen()
-}
+    HomeScreen(navController = NavController(context = Context))
+}*/

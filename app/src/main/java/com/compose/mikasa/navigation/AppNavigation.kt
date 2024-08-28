@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.compose.mikasa.screens.BannerScreen
 import com.compose.mikasa.screens.HomeScreen
 
 
@@ -11,9 +12,12 @@ import com.compose.mikasa.screens.HomeScreen
 fun AppNavigationGraph() {
 
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Routes.HOME_SCREEN) {
+    NavHost(navController = navController, startDestination = Routes.BANNER_SCREEN) {
         composable(Routes.HOME_SCREEN) {
-            HomeScreen()
+            HomeScreen(navController = navController)
+        }
+        composable(Routes.BANNER_SCREEN) {
+            BannerScreen(navController = navController)
         }
     }
 }
