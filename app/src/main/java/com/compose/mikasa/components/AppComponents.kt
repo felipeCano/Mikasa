@@ -2,7 +2,6 @@ package com.compose.mikasa.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -42,7 +41,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -51,7 +49,9 @@ import com.compose.mikasa.model.CharactersModel
 import com.compose.mikasa.model.Result
 import com.compose.mikasa.ui.theme.Purple40
 
-
+/**
+ * This fun works as a loader for the informacion of the API
+ */
 @Composable
 fun Loader() {
     Column(
@@ -72,6 +72,9 @@ fun Loader() {
 
 }
 
+/**
+ * this fun unique fun for the list of characters but it is not used
+ */
 @Composable
 fun MiKasaList(characters: CharactersModel) {
     LazyColumn {
@@ -81,6 +84,9 @@ fun MiKasaList(characters: CharactersModel) {
     }
 }
 
+/**
+ * this fun works as a text component, with a Normalized style
+ */
 @Composable
 fun NormalTextComponent(textValue: String) {
     Text(
@@ -97,6 +103,9 @@ fun NormalTextComponent(textValue: String) {
     )
 }
 
+/**
+ * this fun works as a text component, with a Heading style
+ */
 @Composable
 fun HeadingTextComponent(textValue: String) {
     Text(
@@ -110,66 +119,9 @@ fun HeadingTextComponent(textValue: String) {
     )
 }
 
-@Composable
-fun CardLikeMovies(page: Int, character: Result) {
-    Card(
-        Modifier
-            .wrapContentSize()
-            .padding(10.dp)
-            .clickable {
-
-            },
-        elevation = CardDefaults.cardElevation(8.dp)
-    ) {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) {
-            AsyncImage(
-                model = character.img,
-                contentDescription = "",
-                modifier = Modifier
-                    .fillMaxSize()
-                    .clip(RoundedCornerShape(10.dp)),
-                contentScale = ContentScale.Crop,
-                error = painterResource(id = R.drawable.eren_image)
-            )
-            Column(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .background(Color.LightGray.copy(.7f))
-                    .padding(6.dp)
-            ) {
-                Text(
-                    text = "Name: ${character.name}",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp,
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center,
-                    color = Color.Black,
-                    maxLines = 1,
-                    style = TextStyle(
-                        shadow = Shadow(
-                            Color(0xFFFC6603),
-                            offset = Offset(1f, 1f),
-                            3f
-                        )
-                    )
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                Row (Modifier.align(Alignment.End)){
-                Icon(imageVector = Icons.Rounded.Star, contentDescription = "")
-                    Text(
-                        text = "test",
-                        textAlign = TextAlign.Start,
-                        modifier = Modifier.fillMaxSize().padding(start = 8.dp),
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black,
-                        maxLines = 2
-                    )
-                }
-            }
-        }
-    }
-}
-
+/**
+ * this card is another way for use card in compose
+ */
 @Composable
 fun MyCard(page: Int, character: Result) {
 
@@ -213,6 +165,9 @@ fun MyCard(page: Int, character: Result) {
     }
 }
 
+/**
+ * this fun works as a column component for the list of characters
+ */
 @Composable
 fun MiKasaRowComponent(page: Int, character: Result) {
     Column(
@@ -254,6 +209,73 @@ fun MiKasaRowComponent(page: Int, character: Result) {
     }
 }
 
+/**
+ * this fun works as a card component for the list of characters, it's the main using for this example
+ */
+@Composable
+fun CardLikeMovies(itemIndex: Int, character: List<Result>) {
+    Card(
+        Modifier
+            .wrapContentSize()
+            .padding(10.dp)
+            .clickable {
+            },
+        elevation = CardDefaults.cardElevation(8.dp)
+    ) {
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) {
+            AsyncImage(
+                model = character[itemIndex].img,
+                contentDescription = "",
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(RoundedCornerShape(10.dp)),
+                contentScale = ContentScale.Crop,
+                error = painterResource(id = R.drawable.eren_image)
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .background(Color.LightGray.copy(.7f))
+                    .padding(6.dp)
+            ) {
+                Text(
+                    text = "Name: ${character[itemIndex].name}",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    color = Color.Black,
+                    maxLines = 1,
+                    style = TextStyle(
+                        shadow = Shadow(
+                            Color(0xFFFC6603),
+                            offset = Offset(1f, 1f),
+                            3f
+                        )
+                    )
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(Modifier.align(Alignment.End)) {
+                        Icon(imageVector = Icons.Rounded.Star, contentDescription = "")
+                    Text(
+                        text = "Occupation: ${character[itemIndex].occupation}",
+                        textAlign = TextAlign.Start,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 8.dp),
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black,
+                        maxLines = 2
+                    )
+                }
+            }
+        }
+    }
+}
+
+/**
+ * this fun take a group textViews, and show the data of the group
+ */
 @Composable
 fun GroupComponent(name: String?, sub_groups: String?) {
     Column(
@@ -271,6 +293,9 @@ fun GroupComponent(name: String?, sub_groups: String?) {
     }
 }
 
+/**
+ * this fun make a relative textViews, and show the data of the relative
+ */
 @Composable
 fun RelativeComponent(name: String?, sub_groups: String?) {
     Column(
@@ -312,6 +337,9 @@ fun MiKasaRowComponentPreview() {
     MiKasaRowComponent(0, character)
 }
 
+/**
+ * this fun show a empty state when the list is empty
+ */
 @Composable
 fun EmptyStateComponent() {
     Column(

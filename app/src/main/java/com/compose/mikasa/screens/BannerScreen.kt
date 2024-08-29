@@ -21,13 +21,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shader
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -50,12 +50,12 @@ fun BannerScreen(navController: NavController) {
                 .wrapContentHeight()
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter)
-                .background(color = Color.White.copy(alpha = 0.4f), RoundedCornerShape(20.dp))
+                .background(color = Color.White.copy(alpha = 0.7f), RoundedCornerShape(20.dp))
                 .border(0.5.dp, Color.White, RoundedCornerShape(topEnd = 20.dp, topStart = 20.dp)),
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            val offset = Offset(10.0f, 10f)
+            val offset = Offset(2f, 2f)
             Text(
                 text = "Do you wanna know all about our titans?",
                 modifier = Modifier.padding(vertical = 25.dp),
@@ -92,6 +92,7 @@ fun BannerScreen(navController: NavController) {
             ) {
             Text(text = "Meet them", style = TextStyle(
                 fontSize = 30.sp,
+                fontWeight = FontWeight.Bold,
                 color = Color.Black,
                 fontFamily = FontFamily(Font(R.font.cinzel_decorative)),
                 textAlign = TextAlign.Center
