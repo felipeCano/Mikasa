@@ -12,9 +12,6 @@ import io.mockk.coVerify
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertTrue
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -23,24 +20,13 @@ import retrofit2.Response
 class GetCharactersTitansCaseTest {
     @RelaxedMockK
     private lateinit var apiHelper: ApiHelper
-    @RelaxedMockK
-    private lateinit var miKasaRepository: MiKasaRepository
 
-    private var logTest = ""
+    private lateinit var miKasaRepository: MiKasaRepository
 
     @Before
     fun onBefore() {
         MockKAnnotations.init(this)
-        //miKasaRepository = MiKasaRepository(apiHelper)
-        mockk<MiKasaRepository>().also { mockito ->
-            miKasaRepository = mockito
-        }
-    }
-
-    @Test
-    fun test() {
-        logTest = miKasaRepository.testFunc()
-        println("Hola soy un test $logTest")
+        miKasaRepository = MiKasaRepository(apiHelper)
     }
 
     @Test
@@ -65,24 +51,31 @@ class GetCharactersTitansCaseTest {
                 emptyList()
             )
         )
-        var myList = flowOf(
-            ResourceState.Success(CharactersModel(Info(1, 1, ""), listCharacters))
-        )
-        coEvery { miKasaRepository.getCharactersTitans() } returns myList
-        val response = miKasaRepository.getCharactersTitans()
-        assert(response == myList)
+        var myList = CharactersModel(Info(1, 1, ""), listCharacters)
+
+
+        val myListSuccess = Response.success(myList)
+
+        coEvery { apiHelper.getCharactersTitans() } returns myListSuccess
+
+        miKasaRepository.getCharactersTitans().collect { response ->
+            if (response is ResourceState.Success) {
+                assertEquals(myList, response.data)
+            }
+        }
+        coVerify(exactly = 1) { apiHelper.getCharactersTitans() }
     }
 
     @Test
-    fun `getCharactersTitans returns Error when response is not successful`()= runBlocking{
+    fun `getCharactersTitans returns Error when response is not successful`() = runBlocking {
+        val errorResponse = Response.error<CharactersModel>(400, mockk(relaxed = true))
+        coEvery { apiHelper.getCharactersTitans() } returns errorResponse
 
-        var myListError = Response.error<CharactersModel>(400, mockk(relaxed = true))
-        coEvery {apiHelper.getCharactersTitans()} returns myListError
-
-        //var response = apiHelper.getCharactersTitans()
-        var response = miKasaRepository.getCharactersTitans()
-        assert(response == myListError)
-        coVerify { apiHelper.getCharactersTitans() }
+        miKasaRepository.getCharactersTitans().collect { response ->
+            if (response is ResourceState.Error) {
+                assertEquals("Something went wrong", (response).message)
+            }
+        }
+        coVerify(exactly = 1) { apiHelper.getCharactersTitans() }
     }
-}//mockk se llama spky
-//no mockkear repositorio si no el helper, y a repositiro le paso al helper mocckado (esto primero)
+}
