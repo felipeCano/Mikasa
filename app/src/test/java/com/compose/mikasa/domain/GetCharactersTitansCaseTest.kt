@@ -12,6 +12,7 @@ import io.mockk.coVerify
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase.fail
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -68,13 +69,18 @@ class GetCharactersTitansCaseTest {
 
     @Test
     fun `getCharactersTitans returns Error when response is not successful`() = runBlocking {
+        var tester = false
         val errorResponse = Response.error<CharactersModel>(400, mockk(relaxed = true))
         coEvery { apiHelper.getCharactersTitans() } returns errorResponse
 
         miKasaRepository.getCharactersTitans().collect { response ->
             if (response is ResourceState.Error) {
+                tester = true
                 assertEquals("Something went wrong", (response).message)
             }
+        }
+        if (!tester) {
+            fail("Expected ResourceState.Error")
         }
         coVerify(exactly = 1) { apiHelper.getCharactersTitans() }
     }

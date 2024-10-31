@@ -13,7 +13,7 @@ class MiKasaRepository @Inject constructor(
         return flow {
             emit(ResourceState.Loading())
             val response = apiHelper.getCharactersTitans()
-            if (response.isSuccessful && response.body() != null) {
+            if (response.isSuccessful) {
                 response.body()!!.let {
                     emit(ResourceState.Success(it))
                 }
