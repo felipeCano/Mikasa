@@ -19,6 +19,7 @@ class MiKasaRepository @Inject constructor(
                     emit(ResourceState.Success(it))
                 }
             } else {
+                //message jenkis
                 emit(ResourceState.Error("Something went wrong"))
             }
         }
