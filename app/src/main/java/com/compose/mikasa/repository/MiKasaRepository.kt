@@ -19,7 +19,6 @@ class MiKasaRepository @Inject constructor(
                     emit(ResourceState.Success(it))
                 }
             } else {
-                //webhook pipelines
                 emit(ResourceState.Error("Something went wrong"))
             }
         }
